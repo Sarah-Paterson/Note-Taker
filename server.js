@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const notes = require('./db/db.json');
 const fs = require('fs');
-const uuid = require('./helpers/uuid');
+// const uuid = require('./helpers/uuid');
 
 const app = express();
 const PORT = 3001;
@@ -31,23 +31,26 @@ app.post('/api/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      id: uuid(),
+      // id: uuid(),
     };
 
-    const noteString = JSON.stringify(newNote);
+    notes.push(newNote);
 
-    fs.writeFile(`./db/`, noteString, (err) =>
-      err
-        ? console.error(err)
-        : console.log(`Note for ${newNote.title} has been written to JSON file`)
-    );
+    fs.writeFile(`./db/db.json`, JSON.stringify(notes), (err) =>
+    err
+      ? console.error(err)
+      : console.log(`Note for ${newNote.title} has been written to JSON file`)
+  );
 
   } else {
     res.status(400).json('Invalid data, please fix and try again.');
   }
 });
 
-app.delete('/api/notes/:id', (req, res) => res.json(notes));
+app.delete('/api/notes/:id', (req, res) => {
+  res.json(notes);
+  console.info(`${req.method} request received to remove a note`);
+});
 
 app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
