@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const notes = require('./db/db.json');
 const fs = require('fs');
-// const uuid = require('./helpers/uuid');
+const uuid = require('./helpers/uuid');
 
 const app = express();
 const PORT = 3001;
@@ -31,7 +31,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      // id: uuid(),
+      id: uuid(),
     };
 
     notes.push(newNote);
@@ -39,7 +39,7 @@ app.post('/api/notes', (req, res) => {
     fs.writeFile(`./db/db.json`, JSON.stringify(notes), (err) =>
     err
       ? console.error(err)
-      : console.log(`Note for ${newNote.title} has been written to JSON file`)
+      : res.json(newNote)
   );
 
   } else {
@@ -48,7 +48,18 @@ app.post('/api/notes', (req, res) => {
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-  res.json(notes);
+  // read db.json (get all notes)
+  console.log(notes)
+  // once we have the array of objects, iterate though and remove one with matching id (for loop?) (filter? = better)
+  const updatedNotes = notes.filter(id)
+  // once we have the deleted note array, then re-write file 
+  // fs.writeFile(`./db/db.json`, JSON.stringify(updatedNotes), (err) =>
+  // err
+  //   ? console.error(err)
+  //   : res.json(newNote)
+  // );
+
+  res.json("it's all good and new");
   console.info(`${req.method} request received to remove a note`);
 });
 
