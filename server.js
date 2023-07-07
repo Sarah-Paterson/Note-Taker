@@ -51,7 +51,9 @@ app.delete('/api/notes/:id', (req, res) => {
   // read db.json (get all notes)
   console.log(notes)
   // once we have the array of objects, iterate though and remove one with matching id (for loop?) (filter? = better)
-  const updatedNotes = notes.filter(id)
+  const updatedNotes = notes.filter()
+
+  console.log(updatedNotes)
   // once we have the deleted note array, then re-write file 
   // fs.writeFile(`./db/db.json`, JSON.stringify(updatedNotes), (err) =>
   // err
