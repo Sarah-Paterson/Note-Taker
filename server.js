@@ -1,16 +1,23 @@
 const express = require('express');
 const path = require('path');
-const notes = require('./db/db.json');
+let notes = require('./db/db.json');
 const fs = require('fs');
 const uuid = require('./helpers/uuid');
+// const routes = require("./routes")
+// require routes folder
 
 const app = express();
 const PORT = 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// middleware for express router
 
 app.use(express.static('public'));
+
+// call index 
+
+// html routes
 
 app.get('/', (req, res) => 
   res.sendFile(path.join(__dirname, 'public/index.html'))
@@ -47,22 +54,18 @@ app.post('/api/notes', (req, res) => {
   }
 });
 
+// /api go into api routes
+// modify using express router and cut paste
+
 app.delete('/api/notes/:id', (req, res) => {
-  // read db.json (get all notes)
-  console.log(notes)
-  // once we have the array of objects, iterate though and remove one with matching id (for loop?) (filter? = better)
-  const updatedNotes = notes.filter()
+  const id = req.params.id;
+  notes = notes.filter(note => id !== note.id);
 
-  console.log(updatedNotes)
-  // once we have the deleted note array, then re-write file 
-  // fs.writeFile(`./db/db.json`, JSON.stringify(updatedNotes), (err) =>
-  // err
-  //   ? console.error(err)
-  //   : res.json(newNote)
-  // );
-
-  res.json("it's all good and new");
-  console.info(`${req.method} request received to remove a note`);
+  fs.writeFile(`./db/db.json`, JSON.stringify(notes), (err) =>
+  err
+    ? console.error(err)
+    :res.json({message:"Note was successfully deleted"})
+  );
 });
 
 app.listen(PORT, () =>
