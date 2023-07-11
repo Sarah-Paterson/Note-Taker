@@ -28,8 +28,8 @@ Through the process of coding the password generator in JavaScript, I was able t
 
 The key to this project was to add express in a server.js file to create functionality to the existing HTML and CSS and javascript files. Below is the image of the code before. As you can see visually, there are interactive parts to the code that have no function without linking the HTML files and the db.json file. With the new code, the information stored in the file will appear on the left-hand side of the notes page and there will be the ability to add to an review that information.
 
-![Starting Code Landing Page Screenshot](assets "Starting Code Landing Page Screenshot")
-![Starting Code Notes PageScreenshot](assets "Starting Code Notes Page Screenshot")
+![Starting Code Landing Page Screenshot](assets/front-page.png "Starting Code Landing Page Screenshot")
+![Starting Code Notes PageScreenshot](assets/note-page.png "Starting Code Notes Page Screenshot")
 
 ---
 
@@ -37,17 +37,14 @@ The key to this project was to add express in a server.js file to create functio
 
 The final website for the Note Taker allows for the landing page functionality to link to the note page. From the notes page, there will be a list of notes previously added on the left-hand side of the page. The main section allows new notes to be added, and the trash can symbol allows notes to be deleted. These notes will be added and deleted from the db.json file and will keep that information the same.
 
-### Notes Page
-![Notes Page Screenshot](assets "Notes Page Screenshot")
-
 ### New Note
-![New Note Screenshot](assets "New Note Screenshot")
+![New Note Gif](assets/New-Note.gif "New Note Gif")
 
 ### View Note
-![View Note Screenshot](assets "View Note Screenshot")
+![View Note Gif](assets/select-note.gif "View Note Gif")
 
 ### Delete Note
-![Delete Note Screenshot](assets "Delete Note Screenshot")
+![Delete Note Gif](assets/delete-note.gif "Delete Note Gif")
 
 ---
 
